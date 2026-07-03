@@ -17,6 +17,7 @@ def main():
                 return
         screen.fill("black")
         new_player.draw(screen)
+        new_player.update(dt)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
