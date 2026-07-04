@@ -15,3 +15,10 @@ ASTEROID_SPAWN_RATE_SECONDS = 0.8
 ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
 
 SHOT_RADIUS = 5
+
+PROG_DICT = {
+    "level 1": 50,
+    "level 2": 150,
+    "level 3": 300,
+    "level 4": 500,
+}

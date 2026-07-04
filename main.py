@@ -8,6 +8,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from progressbar import Progressbar
 
 
 
@@ -21,12 +22,17 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    displays = pygame.sprite.Group()
+
     Player.containers = (updatable, drawable)
-    Asteroid.containers =(asteroids, updatable, drawable)
-    AsteroidField.containers =(updatable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
+    Progressbar.containers = (displays, updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    level_bar = Progressbar(SCREEN_WIDTH-300, 20, 280, 20)    
+    xp_bar = Progressbar(SCREEN_WIDTH-295, 24.5, 270, 12)
     new_asteroid_field = AsteroidField()
     while True:
         log_state()
