@@ -1,19 +1,23 @@
 import pygame
 from circleshape import CircleShape
 from shot import Shot
+from asteroid import Asteroid
 from constants import PLAYER_RADIUS
 from constants import PLAYER_SPEED
 from constants import PLAYER_TURN_SPEED
 from constants import PLAYER_SHOOT_SPEED
 from constants import PLAYER_SHOOT_COOLDOWN_SECONDS
+from constants import ASTEROID_MIN_RADIUS
 from constants import LINE_WIDTH
 
 class Player(CircleShape):
 
-    def __init__(self, x: float, y: float):
+    def __init__(self, x: float, y: float, player_id: int):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shot_cooldown = 0
+        self.xp = 0
+        self.__player_id = player_id
 
     # in the Player class
     def triangle(self) -> list[pygame.Vector2]:
@@ -54,6 +58,14 @@ class Player(CircleShape):
     def shoot(self) -> None:
         if self.shot_cooldown > 0:
             return
-        new_shot = Shot(self.position[0], self.position[1])
+        new_shot = Shot(self.position[0], self.position[1], self)
         new_shot.velocity = (pygame.Vector2(0,1).rotate(self.rotation))*PLAYER_SHOOT_SPEED
         self.shot_cooldown += PLAYER_SHOOT_COOLDOWN_SECONDS
+
+    
+    def gain_xp(self, ast: Asteroid, shot: Shot) -> None:
+        if ast.radius == ASTEROID_MIN_RADIUS:
+            self.xp += 3            
+        elif ast.radius == ASTEROID_MIN_RADIUS*2:
+            self.xp += 2
+        else: self.xp += 1
