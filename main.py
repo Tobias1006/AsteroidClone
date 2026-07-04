@@ -2,7 +2,6 @@ import sys
 import pygame
 from constants import SCREEN_WIDTH
 from constants import SCREEN_HEIGHT
-from constants import ASTEROID_MIN_RADIUS
 from logger import log_state
 from logger import log_event
 from player import Player
@@ -10,6 +9,7 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
 from progressbar import Progressbar
+from xpbar import Xpbar
 
 
 
@@ -30,17 +30,18 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
     Progressbar.containers = (displays, updatable, drawable)
+    Xpbar.containers = (displays, updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 1)
-    level_bar = Progressbar(SCREEN_WIDTH-300, 20, 280, 20)    
-    xp_bar = Progressbar(SCREEN_WIDTH-295, 24.5, 270, 12)
+    level_bar = Progressbar(SCREEN_WIDTH-300, 20, 280, 20)
+    xp_bar = Xpbar(SCREEN_WIDTH-295, 24.5, 0, 20, player)
     new_asteroid_field = AsteroidField()
     while True:
         log_state()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill("black")         
+        screen.fill("black")        
         updatable.update(dt)
         for ast in asteroids:
             if ast.collides_with(player):
@@ -54,7 +55,7 @@ def main():
                     shot.kill()
                     ast.split()
                     player.gain_xp(ast, shot)
-                    print(player.xp)
+                    print(f"Player-Xp = :{player.xp}")
         for ent in drawable:
             ent.draw(screen)   
         pygame.display.flip()

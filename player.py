@@ -9,6 +9,7 @@ from constants import PLAYER_SHOOT_SPEED
 from constants import PLAYER_SHOOT_COOLDOWN_SECONDS
 from constants import ASTEROID_MIN_RADIUS
 from constants import LINE_WIDTH
+from constants import LEVEL_DICT
 
 class Player(CircleShape):
 
@@ -17,6 +18,7 @@ class Player(CircleShape):
         self.rotation = 0
         self.shot_cooldown = 0
         self.xp = 0
+        self.level = 1
         self.__player_id = player_id
 
     # in the Player class
@@ -69,3 +71,10 @@ class Player(CircleShape):
         elif ast.radius == ASTEROID_MIN_RADIUS*2:
             self.xp += 2
         else: self.xp += 1
+        self.level_up(LEVEL_DICT)
+
+    def level_up(self, level_dict: dict) -> None:
+        needed_xp = level_dict.get(self.level)
+        if needed_xp != None and self.xp >= needed_xp:
+            self.level += 1
+            self.xp = 0

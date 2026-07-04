@@ -4,7 +4,7 @@ import pygame
 class RectShape(pygame.sprite.Sprite):
     containers: tuple[pygame.sprite.Group, ...]
 
-    def __init__(self, left: float, top: float, width: float, height: float) -> None:
+    def __init__(self, left: float, top: float, height: float, width: float = 0) -> None:
         # we will be using this later
         if hasattr(self, "containers"):
             super().__init__(*self.containers)
