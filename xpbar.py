@@ -2,9 +2,7 @@ import pygame
 from progressbar import Progressbar
 from player import Player
 from rectshape import RectShape
-from constants import SCREEN_WIDTH
 from constants import LEVEL_DICT
-from constants import LINE_WIDTH
 
 class Xpbar(RectShape):
     def __init__(self, left_corner: float, top_corner: float, width: float, height: float, player: Player) -> None:
