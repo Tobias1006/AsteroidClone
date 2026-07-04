@@ -18,7 +18,7 @@ class Xpbar(RectShape):
     
     def draw(self, screen: pygame.Surface) -> None:
         if self.width >= 0:
-            xp_rect = pygame.Rect(self.left_corner, self.top_corner, self.height, self.width)
+            xp_rect = pygame.Rect(self.left_corner, self.top_corner, self.width, self.height)
             screen.fill("white", xp_rect)
 
     def update(self, dt):        

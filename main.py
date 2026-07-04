@@ -34,7 +34,7 @@ def main():
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 1)
     level_bar = Progressbar(SCREEN_WIDTH-300, 20, 280, 20)
-    xp_bar = Xpbar(SCREEN_WIDTH-295, 24.5, 0, 20, player)
+    xp_bar = Xpbar(SCREEN_WIDTH-295, 24.5, 0, 12, player)
     new_asteroid_field = AsteroidField()
     while True:
         log_state()
